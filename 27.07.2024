@@ -133,6 +133,7 @@ void main()
  
 
 C_pr-2
+
 #include<stdio.h>
 int main() 
 {
@@ -142,4 +143,19 @@ if(year<=2100)
 
 }
 
+C_pr-3
+
+#include <stdio.h>
+
+void square(int a)
+{
+    printf("Area of square is : %d\n",a);
+}
+void main()
+{
+    int a,b,v;
+    printf("Enter side of square : ");
+    scanf("%d",&a);
+    square(a);
+}
 
