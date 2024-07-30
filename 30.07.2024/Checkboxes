@@ -1,0 +1,15 @@
+import tkinter as tk
+
+def show_status():
+    print(f"Checkbox 1: {var1.get()}, Checkbox 2: {var2.get()}")
+
+root = tk.Tk()
+var1 = tk.IntVar()
+var2 = tk.IntVar()
+checkbox1 = tk.Checkbutton(root, text="Option 1", variable=var1)
+checkbox2 = tk.Checkbutton(root, text="Option 2", variable=var2)
+checkbox1.pack()
+checkbox2.pack()
+button = tk.Button(root, text="Show Status", command=show_status)
+button.pack()
+root.mainloop()
