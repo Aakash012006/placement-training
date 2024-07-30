@@ -1,0 +1,17 @@
+import tkinter as tk
+
+def calculate():
+    try:
+        result = eval(entry.get())
+        label.config(text=f"Result: {result}")
+    except Exception as e:
+        label.config(text=f"Error: {e}")
+
+root = tk.Tk()
+entry = tk.Entry(root)
+entry.pack()
+button = tk.Button(root, text="Calculate", command=calculate)
+button.pack()
+label = tk.Label(root, text="Result: ")
+label.pack()
+root.mainloop()
