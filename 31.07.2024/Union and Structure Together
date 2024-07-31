@@ -1,0 +1,24 @@
+#include <stdio.h>
+
+struct Complex {
+    float real;
+    float imag;
+};
+
+union Value {
+    int integer;
+    float floating;
+    struct Complex complex;
+};
+
+int main() {
+    union Value val;
+    val.integer = 5;
+    printf("Integer: %d\n", val.integer);
+    val.floating = 3.14;
+    printf("Float: %f\n", val.floating);
+    val.complex.real = 1.0;
+    val.complex.imag = 2.0;
+    printf("Complex: %.1f + %.1fi\n", val.complex.real, val.complex.imag);
+    return 0;
+}
