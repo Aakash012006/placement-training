@@ -1,0 +1,13 @@
+#include <stdio.h>
+
+struct Book {
+    char title[50];
+    char author[50];
+    int year;
+};
+
+int main() {
+    struct Book book = {"1984", "George Orwell", 1949};
+    printf("Title: %s\nAuthor: %s\nYear: %d\n", book.title, book.author, book.year);
+    return 0;
+}
