@@ -1,0 +1,21 @@
+#include <stdio.h>
+
+struct Employee {
+    char name[50];
+    int id;
+};
+
+union Data {
+    struct Employee emp;
+    int salary;
+};
+
+int main() {
+    union Data data;
+    data.emp.id = 1;
+    snprintf(data.emp.name, sizeof(data.emp.name), "Alice");
+    printf("Employee ID: %d, Name: %s\n", data.emp.id, data.emp.name);
+    data.salary = 50000;
+    printf("Salary: %d\n", data.salary);
+    return 0;
+}
