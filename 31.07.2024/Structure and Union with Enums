@@ -1,0 +1,19 @@
+#include <stdio.h>
+
+enum Status { OK, ERROR };
+
+struct Data {
+    enum Status status;
+    union {
+        int errorCode;
+        char message[50];
+    } info;
+};
+
+int main() {
+    struct Data data;
+    data.status = ERROR;
+    data.info.errorCode = 404;
+    printf("Status: %d\nError Code: %d\n", data.status, data.info.errorCode);
+    return 0;
+}
