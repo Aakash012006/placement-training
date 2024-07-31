@@ -1,0 +1,14 @@
+#include <stdio.h>
+#include <string.h>
+
+struct Book {
+    char title[50];
+    char author[50];
+};
+
+int compareBooks(struct Book b1, struct Book b2) {
+    return strcmp(b1.title, b2.title) == 0 && strcmp(b1.author, b2.author) == 0;
+}
+
+int main() {
+    struct Book book1 = {"1984", "
