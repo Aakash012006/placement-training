@@ -1,0 +1,128 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+// Node structure for doubly linked list
+typedef struct Node {
+    int data;
+    struct Node *prev;
+    struct Node *next;
+} Node;
+
+// Function pointers for node operations
+typedef int (*CompareFunc)(int, int);
+typedef void (*PrintFunc)(int);
+
+// Function prototypes
+Node* createNode(int data);
+void insertNode(Node **head, int data);
+void deleteNode(Node **head, int data, CompareFunc compare);
+void traverseList(Node *head, PrintFunc print);
+void freeList(Node *head);
+int compareInt(int a, int b);
+void printInt(int data);
+
+int main() {
+    Node *head = NULL;
+
+    // Insert nodes
+    insertNode(&head, 10);
+    insertNode(&head, 20);
+    insertNode(&head, 30);
+    insertNode(&head, 40);
+
+    // Traverse and print nodes
+    printf("List contents:\n");
+    traverseList(head, printInt);
+
+    // Delete a node
+    deleteNode(&head, 30, compareInt);
+
+    // Traverse and print nodes after deletion
+    printf("List contents after deletion:\n");
+    traverseList(head, printInt);
+
+    // Free the list
+    freeList(head);
+
+    return 0;
+}
+
+// Create a new node
+Node* createNode(int data) {
+    Node *newNode = (Node *)malloc(sizeof(Node));
+    if (!newNode) {
+        fprintf(stderr, "Memory allocation failed\n");
+        exit(1);
+    }
+    newNode->data = data;
+    newNode->prev = NULL;
+    newNode->next = NULL;
+    return newNode;
+}
+
+// Insert a node at the end
+void insertNode(Node **head, int data) {
+    Node *newNode = createNode(data);
+    if (*head == NULL) {
+        *head = newNode;
+        return;
+    }
+    Node *temp = *head;
+    while (temp->next != NULL) {
+        temp = temp->next;
+    }
+    temp->next = newNode;
+    newNode->prev = temp;
+}
+
+// Delete a node with specific data
+void deleteNode(Node **head, int data, CompareFunc compare) {
+    Node *temp = *head;
+    while (temp != NULL) {
+        if (compare(temp->data, data) == 0) {
+            if (temp->prev) {
+                temp->prev->next = temp->next;
+            } else {
+                *head = temp->next;
+            }
+            if (temp->next) {
+                temp->next->prev = temp->prev;
+            }
+            free(temp);
+            return;
+        }
+        temp = temp->next;
+    }
+    printf("Node with data %d not found\n", data);
+}
+
+// Traverse and print the list
+void traverseList(Node *head, PrintFunc print) {
+    Node *temp = head;
+    while (temp != NULL) {
+        print(temp->data);
+        temp = temp->next;
+    }
+    printf("\n");
+}
+
+// Free all nodes in the list
+void freeList(Node *head) {
+    Node *temp;
+    while (head != NULL) {
+        temp = head;
+        head = head->next;
+        free(temp);
+    }
+}
+
+// Compare two integers
+int compareInt(int a, int b) {
+    return (a - b);
+}
+
+// Print an integer
+void printInt(int data) {
+    printf("%d ", data);
+}
