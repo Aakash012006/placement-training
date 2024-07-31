@@ -1,0 +1,14 @@
+#include <stdio.h>
+
+struct Person {
+    char name[50];
+    int age;
+};
+
+int main() {
+    struct Person p = {"Charlie", 35};
+    printf("Name: %s\nAge: %d\n", p.name, p.age);
+    p.age += 1;
+    printf("Next Year Age: %d\n", p.age);
+    return 0;
+}
