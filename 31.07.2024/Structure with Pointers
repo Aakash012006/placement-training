@@ -1,0 +1,13 @@
+#include <stdio.h>
+
+struct Book {
+    char title[50];
+    char *author;
+};
+
+int main() {
+    char authorName[] = "J.K. Rowling";
+    struct Book book = {"Harry Potter", authorName};
+    printf("Title: %s\nAuthor: %s\n", book.title, book.author);
+    return 0;
+}
