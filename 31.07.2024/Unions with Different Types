@@ -1,0 +1,15 @@
+#include <stdio.h>
+
+union Data {
+    int i;
+    double d;
+};
+
+int main() {
+    union Data data;
+    data.i = 10;
+    printf("Integer: %d\n", data.i);
+    data.d = 3.14159;
+    printf("Double: %f\n", data.d);
+    return 0;
+}
