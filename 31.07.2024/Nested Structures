@@ -1,0 +1,17 @@
+#include <stdio.h>
+
+struct Address {
+    char street[50];
+    char city[50];
+};
+
+struct Employee {
+    int id;
+    struct Address addr;
+};
+
+int main() {
+    struct Employee emp = {1, {"123 Main St", "Springfield"}};
+    printf("Employee ID: %d\nAddress: %s, %s\n", emp.id, emp.addr.street, emp.addr.city);
+    return 0;
+}
