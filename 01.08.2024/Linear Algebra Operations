@@ -1,0 +1,12 @@
+import numpy as np
+
+# Define a matrix
+matrix = np.array([[1, 2], [3, 4]])
+
+# Calculate the inverse of the matrix
+inverse_matrix = np.linalg.inv(matrix)
+print("Inverse of Matrix:\n", inverse_matrix)
+
+# Calculate the determinant of the matrix
+determinant = np.linalg.det(matrix)
+print("Determinant of Matrix:", determinant)
