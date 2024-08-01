@@ -1,0 +1,11 @@
+import numpy as np
+
+# Create an array
+array = np.array([1, 2, 3, 4, 5])
+
+# Save the array to a file
+np.save('array_file.npy', array)
+
+# Load the array from the file
+loaded_array = np.load('array_file.npy')
+print("Loaded Array:", loaded_array)
