@@ -1,0 +1,8 @@
+import numpy as np
+
+# Create a 2D array
+matrix = np.array([[1, 2, 3], [4, 5, 6]])
+
+# Add a 1D array to each row of the matrix
+result = matrix + np.array([10, 20, 30])
+print("Broadcasting Result:\n", result)
