@@ -1,0 +1,13 @@
+import numpy as np
+
+# Create an array
+data = np.array([1, 2, 3, 4, 5])
+
+# Calculate mean, median, and standard deviation
+mean_val = np.mean(data)
+median_val = np.median(data)
+std_dev = np.std(data)
+
+print("Mean:", mean_val)
+print("Median:", median_val)
+print("Standard Deviation:", std_dev)
