@@ -1,0 +1,5 @@
+import numpy as np
+
+# Create a 1D array with values 0 through 4
+arr = np.arange(5)
+print("1D Array:\n", arr)
