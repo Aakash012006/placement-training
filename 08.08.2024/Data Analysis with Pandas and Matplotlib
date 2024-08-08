@@ -1,0 +1,14 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load a dataset
+df = pd.read_csv('data.csv')
+
+# Basic data analysis
+print(df.describe())
+
+# Plot data
+df['column_name'].plot(kind='hist')
+plt.title('Histogram of Column Name')
+plt.xlabel('Value')
+plt.show()
