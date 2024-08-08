@@ -1,0 +1,21 @@
+import nltk
+from nltk.chat.util import Chat, reflections
+
+pairs = [
+    (r'I need (.*)', ('Why do you need %1?')),
+    (r'What is your name?', ('My name is Chatbot.')),
+    (r'Quit', ('Bye!')),
+]
+
+def chatbot():
+    chat = Chat(pairs, reflections)
+    print("Hello! I'm a chatbot. Type 'Quit' to end the conversation.")
+    while True:
+        user_input = input("You: ")
+        if user_input == 'Quit':
+            break
+        response = chat.respond(user_input)
+        print("Chatbot: " + response)
+
+if __name__ == "__main__":
+    chatbot()
