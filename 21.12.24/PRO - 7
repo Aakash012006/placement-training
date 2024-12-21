@@ -1,0 +1,42 @@
+PROGRAM:
+-------------------------------------------------------------
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        // Create a Scanner object to read input
+        Scanner scanner = new Scanner(System.in);
+
+        // Read the number of queries
+        int q = scanner.nextInt();
+
+        // Process each query
+        for (int i = 0; i < q; i++) {
+            int a = scanner.nextInt(); // Read a
+            int b = scanner.nextInt(); // Read b
+            int n = scanner.nextInt(); // Read n
+
+            // Generate the series for the current query
+            int term = a;
+            for (int j = 0; j < n; j++) {
+                term += Math.pow(2, j) * b;
+                System.out.print(term + " ");
+            }
+            System.out.println();
+        }
+
+        // Close the scanner
+        scanner.close();
+    }
+}
+
+***************************************************************
+****************************************************************
+INPUT:
+2
+0 2 10
+5 3 5
+
+OUTPUT:
+2 6 14 30 62 126 254 510 1022 2046
+8 14 26 50 98
