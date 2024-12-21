@@ -1,0 +1,58 @@
+PROGRAM:
+----------------------------------------------------------
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        // Create a Scanner object to read input
+        Scanner scanner = new Scanner(System.in);
+
+        // Read the number of test cases
+        int t = scanner.nextInt();
+
+        // Process each test case
+        for (int i = 0; i < t; i++) {
+            try {
+                // Read the number and parse it as a long
+                long n = scanner.nextLong();
+                System.out.println(n + " can be fitted in:");
+                
+                // Check each data type
+                if (n >= Byte.MIN_VALUE && n <= Byte.MAX_VALUE) {
+                    System.out.println("* byte");
+                }
+                if (n >= Short.MIN_VALUE && n <= Short.MAX_VALUE) {
+                    System.out.println("* short");
+                }
+                if (n >= Integer.MIN_VALUE && n <= Integer.MAX_VALUE) {
+                    System.out.println("* int");
+                }
+                System.out.println("* long");
+            } catch (Exception e) {
+                // Handle numbers that are too large
+                System.out.println(scanner.next() + " can't be fitted anywhere.");
+            }
+        }
+
+        // Close the scanner
+        scanner.close();
+    }
+}
+
+*************************************************************
+*************************************************************
+OUTPUT:
+-150 can be fitted in:
+* byte
+* short
+* int
+* long
+150000 can be fitted in:
+* int
+* long
+1500000000 can be fitted in:
+* int
+* long
+213333333333333333333333333333333333 can't be fitted anywhere.
+-100000000000000 can be fitted in:
+* long
