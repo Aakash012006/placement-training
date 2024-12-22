@@ -1,0 +1,22 @@
+PROGRAM:
+-----------------------------------------------
+import java.util.*;
+import java.io.*;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        scanner.close();
+
+        // Convert the integer to a string
+        String s = Integer.toString(n);
+
+        // Check if the conversion is successful
+        if (n == Integer.parseInt(s)) {
+            System.out.println("Good job");
+        } else {
+            System.out.println("Wrong answer");
+        }
+    }
+}
