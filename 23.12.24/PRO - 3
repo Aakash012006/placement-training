@@ -1,0 +1,24 @@
+PROGRAM:
+------------------------------------------------------------------------------
+import java.io.*;
+import java.math.*;
+
+public class Solution {
+    public static void main(String[] args) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+
+        // Read input number as a string
+        String n = bufferedReader.readLine();
+        bufferedReader.close();
+
+        // Convert the string to a BigInteger
+        BigInteger number = new BigInteger(n);
+
+        // Check if the number is prime
+        if (number.isProbablePrime(10)) { // 10 is the certainty level
+            System.out.println("prime");
+        } else {
+            System.out.println("not prime");
+        }
+    }
+}
