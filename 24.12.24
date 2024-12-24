@@ -1,0 +1,23 @@
+PROGRAM:
+--------------------------------------------------
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+
+        // Read the string input
+        String S = in.next();
+
+        // Read the start and end indices
+        int start = in.nextInt();
+        int end = in.nextInt();
+
+        in.close();
+
+        // Extract and print the substring
+        System.out.println(S.substring(start, end));
+    }
+}
