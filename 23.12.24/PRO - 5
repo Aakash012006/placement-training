@@ -1,0 +1,128 @@
+PROGRAM:
+-----------------------------------------------------------------
+import java.util.Scanner;
+
+public class TicTacToeAI {
+    static char[][] board = {
+        {'_', '_', '_'},
+        {'_', '_', '_'},
+        {'_', '_', '_'}
+    };
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while (true) {
+            printBoard();
+            System.out.println("Your turn (enter row and column): ");
+            int row = sc.nextInt();
+            int col = sc.nextInt();
+            if (board[row][col] != '_') {
+                System.out.println("Invalid move! Try again.");
+                continue;
+            }
+            board[row][col] = 'X';
+
+            if (checkWinner('X')) {
+                printBoard();
+                System.out.println("You win!");
+                break;
+            }
+
+            if (isBoardFull()) {
+                printBoard();
+                System.out.println("It's a draw!");
+                break;
+            }
+
+            System.out.println("AI's turn:");
+            int[] bestMove = findBestMove();
+            board[bestMove[0]][bestMove[1]] = 'O';
+
+            if (checkWinner('O')) {
+                printBoard();
+                System.out.println("AI wins!");
+                break;
+            }
+        }
+    }
+
+    static int[] findBestMove() {
+        int bestVal = Integer.MIN_VALUE;
+        int[] bestMove = {-1, -1};
+
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (board[i][j] == '_') {
+                    board[i][j] = 'O';
+                    int moveVal = minimax(0, false);
+                    board[i][j] = '_';
+                    if (moveVal > bestVal) {
+                        bestVal = moveVal;
+                        bestMove = new int[]{i, j};
+                    }
+                }
+            }
+        }
+        return bestMove;
+    }
+
+    static int minimax(int depth, boolean isMax) {
+        if (checkWinner('O')) return 10 - depth;
+        if (checkWinner('X')) return depth - 10;
+        if (isBoardFull()) return 0;
+
+        if (isMax) {
+            int best = Integer.MIN_VALUE;
+            for (int i = 0; i < 3; i++) {
+                for (int j = 0; j < 3; j++) {
+                    if (board[i][j] == '_') {
+                        board[i][j] = 'O';
+                        best = Math.max(best, minimax(depth + 1, false));
+                        board[i][j] = '_';
+                    }
+                }
+            }
+            return best;
+        } else {
+            int best = Integer.MAX_VALUE;
+            for (int i = 0; i < 3; i++) {
+                for (int j = 0; j < 3; j++) {
+                    if (board[i][j] == '_') {
+                        board[i][j] = 'X';
+                        best = Math.min(best, minimax(depth + 1, true));
+                        board[i][j] = '_';
+                    }
+                }
+            }
+            return best;
+        }
+    }
+
+    static boolean checkWinner(char player) {
+        for (int i = 0; i < 3; i++) {
+            if (board[i][0] == player && board[i][1] == player && board[i][2] == player) return true;
+            if (board[0][i] == player && board[1][i] == player && board[2][i] == player) return true;
+        }
+        if (board[0][0] == player && board[1][1] == player && board[2][2] == player) return true;
+        if (board[0][2] == player && board[1][1] == player && board[2][0] == player) return true;
+        return false;
+    }
+
+    static boolean isBoardFull() {
+        for (char[] row : board) {
+            for (char cell : row) {
+                if (cell == '_') return false;
+            }
+        }
+        return true;
+    }
+
+    static void printBoard() {
+        for (char[] row : board) {
+            for (char cell : row) {
+                System.out.print(cell + " ");
+            }
+            System.out.println();
+        }
+    }
+}
