@@ -1,0 +1,62 @@
+PROGRAM:
+------------------------------------------------------------------------------
+public class GameOfLife {
+    public static void gameOfLife(int[][] board) {
+        int rows = board.length, cols = board[0].length;
+        int[][] nextState = new int[rows][cols];
+
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < cols; col++) {
+                int liveNeighbors = countLiveNeighbors(board, row, col);
+                if (board[row][col] == 1 && (liveNeighbors < 2 || liveNeighbors > 3)) {
+                    nextState[row][col] = 0; // Dies
+                } else if (board[row][col] == 0 && liveNeighbors == 3) {
+                    nextState[row][col] = 1; // Becomes alive
+                } else {
+                    nextState[row][col] = board[row][col]; // Stays the same
+                }
+            }
+        }
+
+        for (int i = 0; i < rows; i++) {
+            System.arraycopy(nextState[i], 0, board[i], 0, cols);
+        }
+    }
+
+    private static int countLiveNeighbors(int[][] board, int row, int col) {
+        int rows = board.length, cols = board[0].length;
+        int liveNeighbors = 0;
+
+        for (int i = -1; i <= 1; i++) {
+            for (int j = -1; j <= 1; j++) {
+                if (i == 0 && j == 0) continue;
+                int r = row + i, c = col + j;
+                if (r >= 0 && r < rows && c >= 0 && c < cols) {
+                    liveNeighbors += board[r][c];
+                }
+            }
+        }
+        return liveNeighbors;
+    }
+
+    public static void main(String[] args) {
+        int[][] board = {
+            {0, 1, 0},
+            {0, 0, 1},
+            {1, 1, 1},
+            {0, 0, 0}
+        };
+
+        System.out.println("Initial State:");
+        for (int[] row : board) {
+            System.out.println(Arrays.toString(row));
+        }
+
+        gameOfLife(board);
+
+        System.out.println("\nNext State:");
+        for (int[] row : board) {
+            System.out.println(Arrays.toString(row));
+        }
+    }
+}
