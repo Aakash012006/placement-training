@@ -1,0 +1,53 @@
+PROGRAM:
+---------------------------------------------------------------
+public class KnightsTour {
+    private static final int[] rowMove = {-2, -1, 1, 2, 2, 1, -1, -2};
+    private static final int[] colMove = {1, 2, 2, 1, -1, -2, -2, -1};
+
+    public static void solveKnightsTour(int n) {
+        int[][] board = new int[n][n];
+        for (int[] row : board) {
+            Arrays.fill(row, -1);
+        }
+        board[0][0] = 0;
+
+        if (backtrack(board, 0, 0, 1, n)) {
+            printBoard(board);
+        } else {
+            System.out.println("No solution exists");
+        }
+    }
+
+    private static boolean backtrack(int[][] board, int row, int col, int move, int n) {
+        if (move == n * n) return true;
+
+        for (int i = 0; i < 8; i++) {
+            int nextRow = row + rowMove[i];
+            int nextCol = col + colMove[i];
+            if (isSafe(nextRow, nextCol, board, n)) {
+                board[nextRow][nextCol] = move;
+                if (backtrack(board, nextRow, nextCol, move + 1, n)) return true;
+                board[nextRow][nextCol] = -1;
+            }
+        }
+        return false;
+    }
+
+    private static boolean isSafe(int row, int col, int[][] board, int n) {
+        return row >= 0 && row < n && col >= 0 && col < n && board[row][col] == -1;
+    }
+
+    private static void printBoard(int[][] board) {
+        for (int[] row : board) {
+            for (int cell : row) {
+                System.out.printf("%2d ", cell);
+            }
+            System.out.println();
+        }
+    }
+
+    public static void main(String[] args) {
+        int n = 8;
+        solveKnightsTour(n);
+    }
+}
