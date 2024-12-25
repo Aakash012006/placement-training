@@ -1,0 +1,47 @@
+PROGRAM:
+---------------------------------------------------------------------
+import java.util.*;
+
+class LRUCache {
+    private final int capacity;
+    private final Map<Integer, Integer> cache;
+    private final LinkedHashSet<Integer> usage;
+
+    public LRUCache(int capacity) {
+        this.capacity = capacity;
+        this.cache = new HashMap<>();
+        this.usage = new LinkedHashSet<>();
+    }
+
+    public int get(int key) {
+        if (!cache.containsKey(key)) return -1;
+        usage.remove(key);
+        usage.add(key);
+        return cache.get(key);
+    }
+
+    public void put(int key, int value) {
+        if (cache.containsKey(key)) {
+            usage.remove(key);
+        } else if (cache.size() == capacity) {
+            int oldest = usage.iterator().next();
+            usage.remove(oldest);
+            cache.remove(oldest);
+        }
+        usage.add(key);
+        cache.put(key, value);
+    }
+
+    public static void main(String[] args) {
+        LRUCache lruCache = new LRUCache(2);
+        lruCache.put(1, 1);
+        lruCache.put(2, 2);
+        System.out.println(lruCache.get(1)); // Output: 1
+        lruCache.put(3, 3);
+        System.out.println(lruCache.get(2)); // Output: -1
+        lruCache.put(4, 4);
+        System.out.println(lruCache.get(1)); // Output: -1
+        System.out.println(lruCache.get(3)); // Output: 3
+        System.out.println(lruCache.get(4)); // Output: 4
+    }
+}
