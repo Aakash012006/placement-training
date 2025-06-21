@@ -1,0 +1,18 @@
+Simple Inventory System
+=========================================
+public class Product {
+    private String name;
+    private int id;
+    private double price;
+
+    public Product(int id, String name, double price) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+    }
+
+    @Override
+    public String toString() {
+        return "Product ID: " + id + ", Name: " + name + ", Price: " + price;
+    }
+}
