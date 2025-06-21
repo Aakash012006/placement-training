@@ -1,0 +1,13 @@
+Palindrome Checker
+==============================================================
+public class Palindrome {
+    public static void main(String[] args) {
+        String word = "madam";
+        String reverse = new StringBuilder(word).reverse().toString();
+        if (word.equals(reverse)) {
+            System.out.println("Palindrome");
+        } else {
+            System.out.println("Not Palindrome");
+        }
+    }
+}
