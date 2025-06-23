@@ -1,0 +1,26 @@
+import java.util.Scanner;
+public class ATM {
+    public static void main(String[] args) {
+        int balance = 1000;
+        Scanner sc = new Scanner(System.in);
+        while (true) {
+            System.out.println("1. Check\n2. Deposit\n3. Withdraw\n4. Exit");
+            int ch = sc.nextInt();
+            switch (ch) {
+                case 1: System.out.println("Balance: " + balance); break;
+                case 2:
+                    System.out.print("Amount: ");
+                    balance += sc.nextInt();
+                    break;
+                case 3:
+                    System.out.print("Withdraw: ");
+                    int amt = sc.nextInt();
+                    if (amt <= balance) balance -= amt;
+                    else System.out.println("Insufficient funds");
+                    break;
+                case 4: return;
+                default: System.out.println("Invalid choice");
+            }
+        }
+    }
+}
