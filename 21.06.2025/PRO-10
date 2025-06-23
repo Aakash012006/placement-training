@@ -1,0 +1,13 @@
+class Overload {
+    void show(int a) {
+        System.out.println("Int: " + a);
+    }
+    void show(String b) {
+        System.out.println("String: " + b);
+    }
+    public static void main(String[] args) {
+        Overload obj = new Overload();
+        obj.show(5);
+        obj.show("Hello");
+    }
+}
