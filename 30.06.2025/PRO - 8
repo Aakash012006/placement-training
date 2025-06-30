@@ -1,0 +1,4 @@
+keys = ['name', 'age', 'gender']
+values = ['Ravi', 22, 'Male']
+dictionary = dict(zip(keys, values))
+print("Created dictionary:", dictionary)
