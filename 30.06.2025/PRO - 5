@@ -1,0 +1,4 @@
+text = input("Enter a string: ")
+cap = sum(1 for c in text if c.isupper())
+low = sum(1 for c in text if c.islower())
+print(f"Uppercase: {cap}, Lowercase: {low}")
