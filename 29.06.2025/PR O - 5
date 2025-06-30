@@ -1,0 +1,3 @@
+text = input("Enter text: ")
+char = input("Character to count: ")
+print(f"Occurrences of '{char}':", text.count(char))
