@@ -1,0 +1,11 @@
+def find_duplicates(lst):
+    seen = set()
+    duplicates = set()
+    for item in lst:
+        if item in seen:
+            duplicates.add(item)
+        seen.add(item)
+    return list(duplicates)
+
+lst = [1, 3, 5, 3, 7, 9, 1, 5]
+print("Duplicates:", find_duplicates(lst))
