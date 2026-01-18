@@ -1,0 +1,146 @@
+import java.io.*;
+import java.util.*;
+
+class Student {
+    String rollNo;
+    String name;
+    String dept;
+    int marks;
+
+    Student(String r, String n, String d, int m) {
+        rollNo = r;
+        name = n;
+        dept = d;
+        marks = m;
+    }
+
+    public String toString() {
+        return rollNo + "," + name + "," + dept + "," + marks;
+    }
+}
+
+public class StudentManagementSystem {
+    static Scanner sc = new Scanner(System.in);
+
+    public static void addStudent() throws IOException {
+        FileWriter fw = new FileWriter("students.txt", true);
+
+        System.out.print("Enter Roll No: ");
+        String roll = sc.nextLine();
+        System.out.print("Enter Name: ");
+        String name = sc.nextLine();
+        System.out.print("Enter Department: ");
+        String dept = sc.nextLine();
+        System.out.print("Enter Marks: ");
+        int marks = Integer.parseInt(sc.nextLine());
+
+        Student s = new Student(roll, name, dept, marks);
+        fw.write(s.toString() + "\n");
+        fw.close();
+
+        System.out.println("Student Added Successfully!\n");
+    }
+
+    public static void viewStudents() throws IOException {
+        File file = new File("students.txt");
+        if (!file.exists()) {
+            System.out.println("No records found!");
+            return;
+        }
+
+        BufferedReader br = new BufferedReader(new FileReader(file));
+        String line;
+        System.out.println("\nRoll  Name  Dept  Marks");
+        System.out.println("----------------------");
+        while ((line = br.readLine()) != null) {
+            String[] data = line.split(",");
+            System.out.println(data[0] + " " + data[1] + " " + data[2] + " " + data[3]);
+        }
+        br.close();
+    }
+
+    public static void searchStudent() throws IOException {
+        System.out.print("Enter Roll No to search: ");
+        String roll = sc.nextLine();
+        BufferedReader br = new BufferedReader(new FileReader("students.txt"));
+        String line;
+        boolean found = false;
+
+        while ((line = br.readLine()) != null) {
+            String[] data = line.split(",");
+            if (data[0].equals(roll)) {
+                System.out.println("Record Found:");
+                System.out.println("Roll: " + data[0]);
+                System.out.println("Name: " + data[1]);
+                System.out.println("Dept: " + data[2]);
+                System.out.println("Marks: " + data[3]);
+                found = true;
+                break;
+            }
+        }
+        br.close();
+
+        if (!found)
+            System.out.println("Student Not Found!");
+    }
+
+    public static void deleteStudent() throws IOException {
+        System.out.print("Enter Roll No to delete: ");
+        String roll = sc.nextLine();
+
+        File input = new File("students.txt");
+        File temp = new File("temp.txt");
+
+        BufferedReader br = new BufferedReader(new FileReader(input));
+        BufferedWriter bw = new BufferedWriter(new FileWriter(temp));
+
+        String line;
+        boolean found = false;
+
+        while ((line = br.readLine()) != null) {
+            String[] data = line.split(",");
+            if (!data[0].equals(roll)) {
+                bw.write(line + "\n");
+            } else {
+                found = true;
+            }
+        }
+
+        br.close();
+        bw.close();
+
+        input.delete();
+        temp.renameTo(input);
+
+        if (found)
+            System.out.println("Student Deleted Successfully!");
+        else
+            System.out.println("Student Not Found!");
+    }
+
+    public static void main(String[] args) throws IOException {
+        while (true) {
+            System.out.println("\n--- Student Management System ---");
+            System.out.println("1. Add Student");
+            System.out.println("2. View Students");
+            System.out.println("3. Search Student");
+            System.out.println("4. Delete Student");
+            System.out.println("5. Exit");
+
+            System.out.print("Enter Choice: ");
+            int choice = Integer.parseInt(sc.nextLine());
+
+            switch (choice) {
+                case 1: addStudent(); break;
+                case 2: viewStudents(); break;
+                case 3: searchStudent(); break;
+                case 4: deleteStudent(); break;
+                case 5:
+                    System.out.println("Thank You!");
+                    System.exit(0);
+                default:
+                    System.out.println("Invalid Choice!");
+            }
+        }
+    }
+}
